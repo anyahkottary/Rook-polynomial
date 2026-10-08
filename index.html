@@ -25,23 +25,268 @@
     </nav>
 
     <main>
-
         <section id="definitions">
-            <h2>Definitions</h2>
+    <h2>Definitions</h2>
+
+    <p>
+        Rook polynomials are a mathematical tool used to count
+        the number of ways of placing non-attacking rooks on a
+        board, including boards where some squares are restricted.
+    </p>
+
+
+    <div class="card-container">
+
+        <div class="card">
+            <h3>♜ Rook</h3>
 
             <p>
-                Rook polynomials are used to count the ways of placing
-                non-attacking rooks on a board.
+                A rook is a chess piece that can move any number
+                of squares horizontally or vertically.
             </p>
-        </section>
+        </div>
 
-        <section id="examples">
-            <h2>Examples</h2>
+
+        <div class="card">
+            <h3>Restricted Board</h3>
 
             <p>
-                Examples of rook polynomial calculations will be added here.
+                A restricted board is a board in which certain
+                squares cannot be used for placing rooks.
             </p>
-        </section>
+        </div>
+
+
+        <div class="card">
+            <h3>Non-Attacking Rooks</h3>
+
+            <p>
+                Rooks are non-attacking when no two rooks are
+                placed in the same row or the same column.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <h3>Rook Number</h3>
+
+            <p>
+                The rook number r<sub>k</sub> is the number of ways
+                to place k non-attacking rooks on the allowed
+                squares of a board.
+            </p>
+        </div>
+
+    </div>
+
+
+    <h3>Rook Polynomial</h3>
+
+    <p>
+        If r<sub>k</sub> represents the number of ways to place
+        k non-attacking rooks, then the rook polynomial of a
+        board B is:
+    </p>
+
+
+    <div class="formula">
+        R<sub>B</sub>(x) =
+        r<sub>0</sub> +
+        r<sub>1</sub>x +
+        r<sub>2</sub>x<sup>2</sup> +
+        ... +
+        r<sub>n</sub>x<sup>n</sup>
+    </div>
+
+
+    <p>
+        Here, r<sub>0</sub> = 1 because there is exactly one way
+        to place zero rooks: place no rooks at all.
+    </p>
+
+</section>
+
+        
+
+      <section id="examples">
+    <h2>Examples</h2>
+
+    <p>
+        The following example shows how rook numbers are calculated
+        for a complete 3 × 3 board and how they are used to form
+        the rook polynomial.
+    </p>
+
+
+    <!-- Visual 3 × 3 Board -->
+
+    <h3>Example Board: 3 × 3 Board</h3>
+
+    <div class="example-board">
+
+        <div class="board-row">
+            <div class="board-cell"></div>
+            <div class="board-cell"></div>
+            <div class="board-cell"></div>
+        </div>
+
+        <div class="board-row">
+            <div class="board-cell"></div>
+            <div class="board-cell"></div>
+            <div class="board-cell"></div>
+        </div>
+
+        <div class="board-row">
+            <div class="board-cell"></div>
+            <div class="board-cell"></div>
+            <div class="board-cell"></div>
+        </div>
+
+    </div>
+
+
+    <!-- Example 1 -->
+
+    <div class="card">
+
+        <h3>Example 1: Placing One Rook</h3>
+
+        <p>
+            A 3 × 3 board has a total of 9 squares.
+            When placing only one rook, it can be placed
+            on any of these 9 squares.
+        </p>
+
+        <p>
+            Therefore, the number of ways to place one rook is:
+        </p>
+
+        <div class="formula">
+            r<sub>1</sub> = 9
+        </div>
+
+    </div>
+
+
+    <!-- Example 2 -->
+
+    <div class="card">
+
+        <h3>Example 2: Placing Two Rooks</h3>
+
+        <p>
+            Two rooks must not be placed in the same row
+            or the same column.
+        </p>
+
+        <p>
+            First, choose 2 different rows.
+            There are 3 possible pairs of rows:
+        </p>
+
+        <p>
+            (Row 1, Row 2), (Row 1, Row 3), (Row 2, Row 3)
+        </p>
+
+        <p>
+            Similarly, there are 3 possible pairs of columns.
+        </p>
+
+        <p>
+            For each selected pair of rows and columns,
+            the two rooks can be arranged in 2 different ways.
+        </p>
+
+        <div class="formula">
+            r<sub>2</sub> = 3 × 3 × 2 = 18
+        </div>
+
+        <p>
+            Therefore, there are 18 ways to place two
+            non-attacking rooks on a 3 × 3 board.
+        </p>
+
+    </div>
+
+
+    <!-- Example 3 -->
+
+    <div class="card">
+
+        <h3>Example 3: Placing Three Rooks</h3>
+
+        <p>
+            When placing three rooks on a 3 × 3 board,
+            each rook must occupy a different row and
+            a different column.
+        </p>
+
+        <p>
+            The first rook has 3 choices.
+            After choosing its row and column, the second
+            rook has 2 choices, and the third rook has 1 choice.
+        </p>
+
+        <div class="formula">
+            r<sub>3</sub> = 3 × 2 × 1 = 6
+        </div>
+
+        <p>
+            Therefore, there are 6 ways to place three
+            non-attacking rooks.
+        </p>
+
+    </div>
+
+
+    <!-- Complete Rook Polynomial -->
+
+    <h3>Complete Rook Polynomial</h3>
+
+    <p>
+        We also have:
+    </p>
+
+    <div class="formula">
+        r<sub>0</sub> = 1
+    </div>
+
+    <p>
+        There is exactly one way to place zero rooks:
+        place no rooks on the board.
+    </p>
+
+    <p>
+        Therefore, the rook numbers for the complete
+        3 × 3 board are:
+    </p>
+
+    <div class="formula">
+        r<sub>0</sub> = 1,
+        &nbsp;
+        r<sub>1</sub> = 9,
+        &nbsp;
+        r<sub>2</sub> = 18,
+        &nbsp;
+        r<sub>3</sub> = 6
+    </div>
+
+    <p>
+        Substituting these values into the rook polynomial:
+    </p>
+
+    <div class="formula">
+        R<sub>B</sub>(x)
+        =
+        1 + 9x + 18x<sup>2</sup> + 6x<sup>3</sup>
+    </div>
+
+    <p>
+        This polynomial represents the number of ways to place
+        different numbers of non-attacking rooks on the board.
+    </p>
+
+</section>
 
         <section id="experiments">
             <h2>Experiments & Activities</h2>
