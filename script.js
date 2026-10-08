@@ -1,0 +1,1 @@
+console.log("Rook Polynomial Explorer loaded successfully!");
