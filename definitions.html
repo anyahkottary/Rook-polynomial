@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#17283d">
+    <title>Definitions | Rook Polynomial</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body class="section-page page-definitions">
+    <header class="section-header">
+        <a class="section-brand" href="index.html">♜ Rook Polynomial</a>
+        <h1>Definitions</h1>
+    </header>
+    <nav class="site-nav" aria-label="Section navigation">
+        <a href="index.html">Home</a>
+        <a href="definitions.html">Definitions</a>
+        <a href="examples.html">Examples</a>
+        <a href="experiments.html">Experiments</a>
+        <a href="tool.html">Interactive Tool</a>
+        <a href="exercises.html">Exercises</a>
+    </nav>
+    <main class="section-main">
+<section id="definitions" class="content-section">
+    <h2>Definitions</h2>
+
+    <p>
+        Rook polynomials are a mathematical tool used to count
+        the number of ways of placing non-attacking rooks on a
+        board, including boards where some squares are restricted.
+    </p>
+
+
+    <div class="card-container">
+
+        <div class="card">
+            <h3>♜ Rook</h3>
+
+            <p>
+                A rook is a chess piece that can move any number
+                of squares horizontally or vertically.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <h3>Restricted Board</h3>
+
+            <p>
+                A restricted board is a board in which certain
+                squares cannot be used for placing rooks.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <h3>Non-Attacking Rooks</h3>
+
+            <p>
+                Rooks are non-attacking when no two rooks are
+                placed in the same row or the same column.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <h3>Rook Number</h3>
+
+            <p>
+                The rook number r<sub>k</sub> is the number of ways
+                to place k non-attacking rooks on the allowed
+                squares of a board.
+            </p>
+        </div>
+
+    </div>
+
+
+    <h3>Rook Polynomial</h3>
+
+    <p>
+        If r<sub>k</sub> represents the number of ways to place
+        k non-attacking rooks, then the rook polynomial of a
+        board B is:
+    </p>
+
+
+    <div class="formula">
+        R<sub>B</sub>(x) =
+        r<sub>0</sub> +
+        r<sub>1</sub>x +
+        r<sub>2</sub>x<sup>2</sup> +
+        ... +
+        r<sub>n</sub>x<sup>n</sup>
+    </div>
+
+
+    <p>
+        Here, r<sub>0</sub> = 1 because there is exactly one way
+        to place zero rooks: place no rooks at all.
+    </p>
+
+    <h3>Formulas for Calculating Rook Numbers</h3>
+
+    <div class="card-container">
+        <div class="card">
+            <h3>Rook Polynomial Formula</h3>
+
+            <div class="formula">
+                R<sub>B</sub>(x) =
+                r<sub>0</sub> +
+                r<sub>1</sub>x +
+                r<sub>2</sub>x<sup>2</sup> +
+                &ctdot; +
+                r<sub>n</sub>x<sup>n</sup>
+            </div>
+
+            <p>
+                R<sub>B</sub>(x) is the rook polynomial of board
+                <em>B</em>. The number r<sub>0</sub> is always 1
+                because there is exactly one way to place zero
+                rooks: place no rooks. Each r<sub>k</sub> counts
+                the ways to place <em>k</em> non-attacking rooks,
+                and <em>x</em> is a variable used in the polynomial.
+            </p>
+
+            <p>
+                For a complete 3 × 3 board:
+            </p>
+
+            <div class="formula">
+                R<sub>B</sub>(x) =
+                1 + 9x + 18x<sup>2</sup> + 6x<sup>3</sup>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Formula for a Complete Rectangular Board</h3>
+
+            <div class="formula">
+                r<sub>k</sub> =
+                C(<em>m</em>, <em>k</em>) ×
+                C(<em>n</em>, <em>k</em>) ×
+                <em>k</em>!
+            </div>
+
+            <p>
+                This formula applies to a complete rectangular
+                board with no restricted squares. <em>m</em> is
+                the number of rows, <em>n</em> is the number of
+                columns, and <em>k</em> is the number of rooks.
+            </p>
+
+            <p>
+                C(<em>m</em>, <em>k</em>) means choosing
+                <em>k</em> rows from <em>m</em> rows, and
+                C(<em>n</em>, <em>k</em>) means choosing
+                <em>k</em> columns from <em>n</em> columns.
+                Finally, <em>k</em>! counts the ways to pair the
+                selected rows and columns to place the rooks.
+            </p>
+
+            <p>
+                For boards with restricted squares, calculate the
+                rook numbers using only the available squares.
+            </p>
+        </div>
+    </div>
+
+</section>
+    </main>
+    <footer>
+        <p>Rook Polynomial</p>
+    </footer>
+</body>
+</html>

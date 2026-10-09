@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#17283d">
+    <title>Interactive Tool | Rook Polynomial</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body class="section-page page-tool">
+    <header class="section-header">
+        <a class="section-brand" href="index.html">♜ Rook Polynomial</a>
+        <h1>Interactive Tool</h1>
+    </header>
+    <nav class="site-nav" aria-label="Section navigation">
+        <a href="index.html">Home</a>
+        <a href="definitions.html">Definitions</a>
+        <a href="examples.html">Examples</a>
+        <a href="experiments.html">Experiments</a>
+        <a href="tool.html">Interactive Tool</a>
+        <a href="exercises.html">Exercises</a>
+    </nav>
+    <main class="section-main">
+<section id="tool" class="content-section">
+
+    <h2>Interactive Tool</h2>
+
+    <p>
+        Create your own board and explore how rook placements
+        affect the rook polynomial.
+    </p>
+
+    <div class="tool-card">
+
+        <h3>Step 1: Choose Board Size</h3>
+
+        <label for="board-size">
+            Select the size of the board:
+        </label>
+
+        <select id="board-size">
+            <option value="2">2 × 2</option>
+            <option value="3" selected>3 × 3</option>
+            <option value="4">4 × 4</option>
+            <option value="5">5 × 5</option>
+        </select>
+
+        <button type="button" id="create-board">
+            Create Board
+        </button>
+
+    </div>
+
+
+    
+
+    <div class="tool-card">
+
+   <h3>Step 2: Build & Explore Your Board</h3>
+
+<p>
+    Restrict squares to create a custom board, or place rooks
+    to experiment with non-attacking arrangements.
+</p>
+
+<p>
+    <strong>Note:</strong> The rooks you place are used to
+    check a particular arrangement. They do not change the
+    rook polynomial.
+</p>
+    <div class="choice-row">
+
+        <button type="button" id="rook-mode">
+            ♜ Place Rook
+        </button>
+
+        <button type="button" id="restrict-mode">
+            ✕ Restrict Square
+        </button>
+
+    </div>
+
+    <p id="mode-instruction">
+        Current mode: Place Rook
+    </p>
+
+    <div id="interactive-board">
+        <!-- Board will be created here -->
+    </div>
+
+</div>
+<button type="button" id="check-rooks">
+    Check Rook Placement
+</button>
+<button type="button" id="reset-board">
+    Reset Board
+</button>
+<div id="rook-result" class="activity-result"></div>
+
+
+    <div class="tool-card">
+
+    <h3>Step 3: Calculate Rook Polynomial</h3>
+
+<p>
+    The rook polynomial describes all possible non-attacking
+    rook placements on the available squares of your board.
+</p>
+
+<p>
+    The calculation considers every possible number of rooks,
+    from 0 up to the size of the board.
+</p>
+    <button type="button" id="calculate-rook-numbers">
+        Calculate Rook Numbers
+    </button>
+
+    <div id="polynomial-result" class="activity-result"></div>
+
+</div>
+
+</section>
+    </main>
+    <footer>
+        <p>Rook Polynomial</p>
+    </footer>
+</body>
+</html>

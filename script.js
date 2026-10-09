@@ -1,5 +1,25 @@
 console.log("Rook Polynomial Explorer loaded successfully!");
 
+// Keep section navigation highlighting in sync with the current page.
+function updateActiveNavigation() {
+    const currentPage = window.location.pathname.split("/").pop() || "index.html";
+
+    document.querySelectorAll(".site-nav a").forEach(link => {
+        const linkPage = new URL(link.href, window.location.href).pathname.split("/").pop();
+        const isCurrentPage = linkPage === currentPage;
+
+        if (isCurrentPage) {
+            link.setAttribute("aria-current", "page");
+        } else {
+            link.removeAttribute("aria-current");
+        }
+    });
+}
+
+updateActiveNavigation();
+window.addEventListener("popstate", updateActiveNavigation);
+window.addEventListener("pageshow", updateActiveNavigation);
+
 
 // ======================================================
 // ACTIVITY 1
@@ -166,6 +186,7 @@ activity4Buttons.forEach(button => {
 // INTERACTIVE TOOL
 // ======================================================
 
+if (document.getElementById("interactive-board")) {
 const createBoardButton =
     document.getElementById("create-board");
 
@@ -756,11 +777,13 @@ calculateRookNumbersButton.addEventListener(
 // ======================================================
 
 createBoard();
+}
 
 // ======================================================
 // EXERCISES QUIZ
 // ======================================================
 
+if (document.getElementById("quiz-form")) {
 const quizForm = document.getElementById("quiz-form");
 const quizScore = document.getElementById("quiz-score");
 const quizResult = document.getElementById("quiz-result");
@@ -881,4 +904,10 @@ restartQuizButton.addEventListener("click", () => {
         feedback.textContent = "";
         feedback.classList.remove("show");
     });
+
+    document.getElementById("exercises").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
 });
+}

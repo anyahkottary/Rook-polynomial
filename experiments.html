@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#17283d">
+    <title>Experiments | Rook Polynomial</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body class="section-page page-experiments">
+    <header class="section-header">
+        <a class="section-brand" href="index.html">♜ Rook Polynomial</a>
+        <h1>Experiments</h1>
+    </header>
+    <nav class="site-nav" aria-label="Section navigation">
+        <a href="index.html">Home</a>
+        <a href="definitions.html">Definitions</a>
+        <a href="examples.html">Examples</a>
+        <a href="experiments.html">Experiments</a>
+        <a href="tool.html">Interactive Tool</a>
+        <a href="exercises.html">Exercises</a>
+    </nav>
+    <main class="section-main">
+<section id="experiments" class="content-section">
+    <h2>Experiments & Activities</h2>
+
+    <p>
+        Test your understanding of rook placement through these
+        short activities. Try to answer before revealing the
+        explanation.
+    </p>
+
+
+    <!-- ACTIVITY 1 -->
+
+    <div class="activity-card">
+
+        <h3>Activity 1: Can the Rooks Attack?</h3>
+
+        <p>
+            Look at the board below. Are the two rooks
+            attacking each other?
+        </p>
+
+        <div class="example-board">
+
+            <div class="board-row">
+                <div class="board-cell">♜</div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+            </div>
+
+            <div class="board-row">
+                <div class="board-cell"></div>
+                <div class="board-cell">♜</div>
+                <div class="board-cell"></div>
+            </div>
+
+            <div class="board-row">
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+            </div>
+
+        </div>
+
+
+        <div class="activity-question">
+
+            <p><strong>Your answer:</strong></p>
+
+            <button type="button"
+                    class="answer-button"
+                    data-answer="not-attacking"
+                    data-activity="activity1">
+                Not Attacking
+            </button>
+
+            <button type="button"
+                    class="answer-button"
+                    data-answer="attacking"
+                    data-activity="activity1">
+                Attacking
+            </button>
+
+        </div>
+
+
+        <div id="activity1-result" class="activity-result">
+        </div>
+
+    </div>
+
+
+    <!-- ACTIVITY 2 -->
+
+    <div class="activity-card">
+
+        <h3>Activity 2: Find the Valid Placement</h3>
+
+        <p>
+            Which of the following arrangements contains
+            two non-attacking rooks?
+        </p>
+
+
+        <div class="activity-options">
+
+            <!-- Option A -->
+
+            <button type="button"
+                    class="board-option"
+                    data-answer="wrong"
+                    data-activity="activity2">
+
+                <div class="mini-board">
+
+                    <div class="mini-row">
+                        <div class="mini-cell">♜</div>
+                        <div class="mini-cell">♜</div>
+                        <div class="mini-cell"></div>
+                    </div>
+
+                    <div class="mini-row">
+                        <div class="mini-cell"></div>
+                        <div class="mini-cell"></div>
+                        <div class="mini-cell"></div>
+                    </div>
+
+                    <div class="mini-row">
+                        <div class="mini-cell"></div>
+                        <div class="mini-cell"></div>
+                        <div class="mini-cell"></div>
+                    </div>
+
+                </div>
+
+                <span>Arrangement A</span>
+
+            </button>
+
+
+            <!-- Option B -->
+
+            <button type="button"
+                    class="board-option"
+                    data-answer="correct"
+                    data-activity="activity2">
+
+                <div class="mini-board">
+
+                    <div class="mini-row">
+                        <div class="mini-cell">♜</div>
+                        <div class="mini-cell"></div>
+                        <div class="mini-cell"></div>
+                    </div>
+
+                    <div class="mini-row">
+                        <div class="mini-cell"></div>
+                        <div class="mini-cell">♜</div>
+                        <div class="mini-cell"></div>
+                    </div>
+
+                    <div class="mini-row">
+                        <div class="mini-cell"></div>
+                        <div class="mini-cell"></div>
+                        <div class="mini-cell"></div>
+                    </div>
+
+                </div>
+
+                <span>Arrangement B</span>
+
+            </button>
+
+
+            <!-- Option C -->
+
+            <button type="button"
+                    class="board-option"
+                    data-answer="wrong"
+                    data-activity="activity2">
+
+                <div class="mini-board">
+
+                    <div class="mini-row">
+                        <div class="mini-cell">♜</div>
+                        <div class="mini-cell"></div>
+                        <div class="mini-cell"></div>
+                    </div>
+
+                    <div class="mini-row">
+                        <div class="mini-cell"></div>
+                        <div class="mini-cell"></div>
+                        <div class="mini-cell"></div>
+                    </div>
+
+                    <div class="mini-row">
+                        <div class="mini-cell">♜</div>
+                        <div class="mini-cell"></div>
+                        <div class="mini-cell"></div>
+                    </div>
+
+                </div>
+
+                <span>Arrangement C</span>
+
+            </button>
+
+        </div>
+
+
+        <div id="activity2-result" class="activity-result">
+        </div>
+
+    </div>
+
+
+    <!-- ACTIVITY 3 -->
+        <!-- ACTIVITY 3 -->
+
+<div class="activity-card">
+
+    <h3>Activity 3: Count the Placements</h3>
+
+    <p>
+        Consider the 2 × 2 board below. How many ways can
+        one non-attacking rook be placed?
+    </p>
+
+    <div class="example-board board-2x2">
+
+        <div class="board-row">
+            <div class="board-cell"></div>
+            <div class="board-cell"></div>
+        </div>
+
+        <div class="board-row">
+            <div class="board-cell"></div>
+            <div class="board-cell"></div>
+        </div>
+
+    </div>
+
+    <p>
+        Choose the correct answer:
+    </p>
+
+    <div class="choice-row">
+
+        <button type="button"
+                class="count-button"
+                data-answer="2"
+                data-activity="activity3">
+            2
+        </button>
+
+        <button type="button"
+                class="count-button"
+                data-answer="4"
+                data-activity="activity3">
+            4
+        </button>
+
+        <button type="button"
+                class="count-button"
+                data-answer="6"
+                data-activity="activity3">
+            6
+        </button>
+
+    </div>
+
+    <div id="activity3-result" class="activity-result">
+    </div>
+
+</div>
+
+    <!-- ACTIVITY 4 -->
+
+    <div class="activity-card">
+
+        <h3>Activity 4: What Happens When Squares Are Restricted?</h3>
+
+        <p>
+            The squares marked with ✕ cannot be used for
+            placing rooks.
+        </p>
+
+
+        <div class="example-board">
+
+            <div class="board-row">
+                <div class="board-cell"></div>
+                <div class="board-cell">✕</div>
+                <div class="board-cell"></div>
+            </div>
+
+            <div class="board-row">
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+                <div class="board-cell">✕</div>
+            </div>
+
+            <div class="board-row">
+                <div class="board-cell">✕</div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+            </div>
+
+        </div>
+
+
+        <p>
+            How many squares are available for placing one rook?
+        </p>
+
+
+        <div class="choice-row">
+
+            <button type="button"
+                    class="count-button"
+                    data-answer="3"
+                    data-activity="activity4">
+                3
+            </button>
+
+            <button type="button"
+                    class="count-button"
+                    data-answer="6"
+                    data-activity="activity4">
+                6
+            </button>
+
+            <button type="button"
+                    class="count-button"
+                    data-answer="9"
+                    data-activity="activity4">
+                9
+            </button>
+
+        </div>
+
+
+        <div id="activity4-result" class="activity-result">
+        </div>
+
+    </div>
+
+
+    <h3>What Do We Learn?</h3>
+
+    <p>
+        These activities show that a valid rook placement
+        requires different rows and columns, and that the
+        number of possible placements depends on the available
+        squares on the board.
+    </p>
+
+</section>
+    </main>
+    <footer>
+        <p>Rook Polynomial</p>
+    </footer>
+</body>
+</html>

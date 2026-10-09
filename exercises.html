@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#17283d">
+    <title>Exercises | Rook Polynomial</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body class="section-page page-exercises">
+    <header class="section-header">
+        <a class="section-brand" href="index.html">♜ Rook Polynomial</a>
+        <h1>Exercises</h1>
+    </header>
+    <nav class="site-nav" aria-label="Section navigation">
+        <a href="index.html">Home</a>
+        <a href="definitions.html">Definitions</a>
+        <a href="examples.html">Examples</a>
+        <a href="experiments.html">Experiments</a>
+        <a href="tool.html">Interactive Tool</a>
+        <a href="exercises.html">Exercises</a>
+    </nav>
+    <main class="section-main">
+<section id="exercises" class="content-section">
+            <h2>Exercises</h2>
+
+            <p>
+                Test your understanding of rook polynomials. Select one answer
+                for each question, then submit the quiz to see your score and
+                explanations.
+            </p>
+
+            <div class="score-box" aria-live="polite">
+                Score: <span id="quiz-score">0</span> / 50
+            </div>
+
+            <form id="quiz-form">
+                <div class="activity-card quiz-question">
+                    <h3 class="quiz-question-heading">
+                        Question 1 <span class="difficulty-badge easy">Easy</span>
+                    </h3>
+                    <p><strong>What does the rook number r<sub>k</sub> represent?</strong></p>
+                    <fieldset class="quiz-options">
+                        <legend class="visually-hidden">Choose an answer for Question 1</legend>
+                        <label class="exercise-answer">
+                            <input type="radio" name="q1" value="squares">
+                            <span><strong>A.</strong> The number of squares on the board</span>
+                        </label>
+                        <label class="exercise-answer">
+                            <input type="radio" name="q1" value="placements">
+                            <span><strong>B.</strong> The number of ways to place k non-attacking rooks</span>
+                        </label>
+                        <label class="exercise-answer">
+                            <input type="radio" name="q1" value="total-rooks">
+                            <span><strong>C.</strong> The total number of rooks on the board</span>
+                        </label>
+                    </fieldset>
+                    <div id="exercise1-result" class="activity-result quiz-question-feedback"></div>
+                </div>
+
+                <div class="activity-card quiz-question">
+                    <h3 class="quiz-question-heading">
+                        Question 2 <span class="difficulty-badge easy">Easy</span>
+                    </h3>
+                    <p><strong>Which arrangement shows two non-attacking rooks?</strong></p>
+                    <fieldset class="quiz-options quiz-option-grid">
+                        <legend class="visually-hidden">Choose an arrangement for Question 2</legend>
+                        <label class="exercise-answer quiz-board-option">
+                            <input type="radio" name="q2" value="a">
+                            <span class="quiz-board-label">A</span>
+                            <span class="quiz-board" role="img" aria-label="Rooks at row 1 column 1 and row 1 column 3">
+                                <span class="quiz-cell">♜</span><span class="quiz-cell"></span><span class="quiz-cell">♜</span>
+                                <span class="quiz-cell"></span><span class="quiz-cell"></span><span class="quiz-cell"></span>
+                                <span class="quiz-cell"></span><span class="quiz-cell"></span><span class="quiz-cell"></span>
+                            </span>
+                            <span>Both share a row</span>
+                        </label>
+                        <label class="exercise-answer quiz-board-option">
+                            <input type="radio" name="q2" value="b">
+                            <span class="quiz-board-label">B</span>
+                            <span class="quiz-board" role="img" aria-label="Rooks at row 1 column 1 and row 2 column 2">
+                                <span class="quiz-cell">♜</span><span class="quiz-cell"></span><span class="quiz-cell"></span>
+                                <span class="quiz-cell"></span><span class="quiz-cell">♜</span><span class="quiz-cell"></span>
+                                <span class="quiz-cell"></span><span class="quiz-cell"></span><span class="quiz-cell"></span>
+                            </span>
+                            <span>Different rows and columns</span>
+                        </label>
+                        <label class="exercise-answer quiz-board-option">
+                            <input type="radio" name="q2" value="c">
+                            <span class="quiz-board-label">C</span>
+                            <span class="quiz-board" role="img" aria-label="Rooks at row 1 column 2 and row 3 column 2">
+                                <span class="quiz-cell"></span><span class="quiz-cell">♜</span><span class="quiz-cell"></span>
+                                <span class="quiz-cell"></span><span class="quiz-cell"></span><span class="quiz-cell"></span>
+                                <span class="quiz-cell"></span><span class="quiz-cell">♜</span><span class="quiz-cell"></span>
+                            </span>
+                            <span>Both share a column</span>
+                        </label>
+                    </fieldset>
+                    <div id="exercise2-result" class="activity-result quiz-question-feedback"></div>
+                </div>
+
+                <div class="activity-card quiz-question">
+                    <h3 class="quiz-question-heading">
+                        Question 3 <span class="difficulty-badge medium">Medium</span>
+                    </h3>
+                    <p>
+                        <strong>For the board below, what is r<sub>1</sub>?</strong>
+                        There are four allowed squares; squares marked × are restricted.
+                    </p>
+                    <div class="quiz-board quiz-board--3 quiz-board-diagram" role="img" aria-label="Two by three board. Top row has two allowed squares and one restricted square. Bottom row has one restricted square and two allowed squares.">
+                        <span class="quiz-cell"></span><span class="quiz-cell"></span><span class="quiz-cell restricted">×</span>
+                        <span class="quiz-cell restricted">×</span><span class="quiz-cell"></span><span class="quiz-cell"></span>
+                    </div>
+                    <fieldset class="quiz-options">
+                        <legend class="visually-hidden">Choose an answer for Question 3</legend>
+                        <label class="exercise-answer">
+                            <input type="radio" name="q3" value="3">
+                            <span><strong>A.</strong> 3</span>
+                        </label>
+                        <label class="exercise-answer">
+                            <input type="radio" name="q3" value="4">
+                            <span><strong>B.</strong> 4</span>
+                        </label>
+                        <label class="exercise-answer">
+                            <input type="radio" name="q3" value="5">
+                            <span><strong>C.</strong> 5</span>
+                        </label>
+                    </fieldset>
+                    <div id="exercise3-result" class="activity-result quiz-question-feedback"></div>
+                </div>
+
+                <div class="activity-card quiz-question">
+                    <h3 class="quiz-question-heading">
+                        Question 4 <span class="difficulty-badge medium">Medium</span>
+                    </h3>
+                    <p>
+                        <strong>How many ways can two non-attacking rooks be placed on a complete 2 × 2 board?</strong>
+                    </p>
+                    <div class="quiz-board quiz-board--2 quiz-board-diagram" role="img" aria-label="Complete two by two board with all four squares available">
+                        <span class="quiz-cell"></span><span class="quiz-cell"></span>
+                        <span class="quiz-cell"></span><span class="quiz-cell"></span>
+                    </div>
+                    <fieldset class="quiz-options">
+                        <legend class="visually-hidden">Choose an answer for Question 4</legend>
+                        <label class="exercise-answer">
+                            <input type="radio" name="q4" value="1">
+                            <span><strong>A.</strong> 1</span>
+                        </label>
+                        <label class="exercise-answer">
+                            <input type="radio" name="q4" value="2">
+                            <span><strong>B.</strong> 2</span>
+                        </label>
+                        <label class="exercise-answer">
+                            <input type="radio" name="q4" value="4">
+                            <span><strong>C.</strong> 4</span>
+                        </label>
+                    </fieldset>
+                    <div id="exercise4-result" class="activity-result quiz-question-feedback"></div>
+                </div>
+
+                <div class="activity-card quiz-question">
+                    <h3 class="quiz-question-heading">
+                        Question 5 <span class="difficulty-badge hard">Hard</span>
+                    </h3>
+                    <p>
+                        <strong>What is the rook polynomial for the board below?</strong>
+                        The lower-right square is restricted.
+                    </p>
+                    <div class="quiz-board quiz-board--2 quiz-board-diagram" role="img" aria-label="Two by two board with the lower-right square restricted and the other three squares allowed">
+                        <span class="quiz-cell"></span><span class="quiz-cell"></span>
+                        <span class="quiz-cell"></span><span class="quiz-cell restricted">×</span>
+                    </div>
+                    <fieldset class="quiz-options">
+                        <legend class="visually-hidden">Choose an answer for Question 5</legend>
+                        <label class="exercise-answer">
+                            <input type="radio" name="q5" value="one-plus-three-x-plus-x-squared">
+                            <span><strong>A.</strong> R<sub>B</sub>(x) = 1 + 3x + x<sup>2</sup></span>
+                        </label>
+                        <label class="exercise-answer">
+                            <input type="radio" name="q5" value="one-plus-two-x">
+                            <span><strong>B.</strong> R<sub>B</sub>(x) = 1 + 2x</span>
+                        </label>
+                        <label class="exercise-answer">
+                            <input type="radio" name="q5" value="one-plus-three-x-plus-two-x-squared">
+                            <span><strong>C.</strong> R<sub>B</sub>(x) = 1 + 3x + 2x<sup>2</sup></span>
+                        </label>
+                    </fieldset>
+                    <div id="exercise5-result" class="activity-result quiz-question-feedback"></div>
+                </div>
+
+                <div class="quiz-actions">
+                    <button type="submit" id="submit-quiz">Submit Quiz</button>
+                    <button type="button" id="restart-quiz" class="secondary-button">Retake Quiz</button>
+                </div>
+            </form>
+
+            <div id="quiz-result" class="activity-result quiz-summary" role="status" aria-live="polite"></div>
+        </section>
+    </main>
+    <footer>
+        <p>Rook Polynomial</p>
+    </footer>
+</body>
+</html>

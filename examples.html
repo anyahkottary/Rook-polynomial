@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#17283d">
+    <title>Examples | Rook Polynomial</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body class="section-page page-examples">
+    <header class="section-header">
+        <a class="section-brand" href="index.html">♜ Rook Polynomial</a>
+        <h1>Examples</h1>
+    </header>
+    <nav class="site-nav" aria-label="Section navigation">
+        <a href="index.html">Home</a>
+        <a href="definitions.html">Definitions</a>
+        <a href="examples.html">Examples</a>
+        <a href="experiments.html">Experiments</a>
+        <a href="tool.html">Interactive Tool</a>
+        <a href="exercises.html">Exercises</a>
+    </nav>
+    <main class="section-main">
+<section id="examples" class="content-section">
+    <h2>Examples</h2>
+
+    <p>
+        Let us consider a complete 3 × 3 board and see how
+        the rook numbers are obtained.
+    </p>
+
+
+    <!-- Example 1 -->
+
+    <div class="card">
+
+        <h3>Example 1: Placing One Rook</h3>
+
+        <p>
+            A 3 × 3 board contains 9 squares. A single rook
+            can be placed on any one of these squares.
+        </p>
+
+        <div class="example-board">
+
+            <div class="board-row">
+                <div class="board-cell">♜</div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+            </div>
+
+            <div class="board-row">
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+            </div>
+
+            <div class="board-row">
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+            </div>
+
+        </div>
+
+        <p>
+            The rook can be placed in any of the 9 squares.
+        </p>
+
+        <div class="formula">
+            r<sub>1</sub> = 9
+        </div>
+
+    </div>
+
+
+    <!-- Example 2 -->
+
+    <div class="card">
+
+        <h3>Example 2: Placing Two Rooks</h3>
+
+        <p>
+            Two rooks must not be in the same row or the same
+            column. Such rooks are called non-attacking rooks.
+        </p>
+
+
+        <h4>Valid Placement</h4>
+
+        <div class="example-board">
+
+            <div class="board-row">
+                <div class="board-cell">♜</div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+            </div>
+
+            <div class="board-row">
+                <div class="board-cell"></div>
+                <div class="board-cell">♜</div>
+                <div class="board-cell"></div>
+            </div>
+
+            <div class="board-row">
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+            </div>
+
+        </div>
+
+        <p>
+            These rooks are in different rows and different
+            columns, so they do not attack each other.
+        </p>
+
+
+        <h4>Invalid Placement</h4>
+
+        <div class="example-board">
+
+            <div class="board-row">
+                <div class="board-cell">♜</div>
+                <div class="board-cell">♜</div>
+                <div class="board-cell"></div>
+            </div>
+
+            <div class="board-row">
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+            </div>
+
+            <div class="board-row">
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+            </div>
+
+        </div>
+
+        <p>
+            These rooks are in the same row, so they attack each
+            other. This is not counted as a valid placement.
+        </p>
+
+
+        <p>
+            Now we count all possible valid placements.
+        </p>
+
+        <p>
+            Choose 2 different rows → 3 ways<br>
+            Choose 2 different columns → 3 ways<br>
+            Arrange the 2 rooks → 2 ways
+        </p>
+
+        <div class="formula">
+            r<sub>2</sub> = 3 × 3 × 2 = 18
+        </div>
+
+        <p>
+            Therefore, there are 18 ways to place two
+            non-attacking rooks.
+        </p>
+
+    </div>
+
+
+    <!-- Example 3 -->
+
+    <div class="card">
+
+        <h3>Example 3: Placing Three Rooks</h3>
+
+        <p>
+            For three rooks, each rook must be placed in a
+            different row and a different column.
+        </p>
+
+        <div class="example-board">
+
+            <div class="board-row">
+                <div class="board-cell">♜</div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+            </div>
+
+            <div class="board-row">
+                <div class="board-cell"></div>
+                <div class="board-cell">♜</div>
+                <div class="board-cell"></div>
+            </div>
+
+            <div class="board-row">
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+                <div class="board-cell">♜</div>
+            </div>
+
+        </div>
+
+        <p>
+            One possible arrangement is shown above. Since no
+            two rooks share a row or column, all three rooks
+            are non-attacking.
+        </p>
+
+        <p>
+            The first rook has 3 choices, the second has 2
+            remaining choices, and the third has 1 remaining
+            choice.
+        </p>
+
+        <div class="formula">
+            r<sub>3</sub> = 3 × 2 × 1 = 6
+        </div>
+
+        <p>
+            Therefore, there are 6 ways to place three
+            non-attacking rooks.
+        </p>
+
+    </div>
+
+
+    <!-- Complete Rook Polynomial -->
+
+    <h3>Complete Rook Polynomial</h3>
+
+    <p>
+        There is one way to place zero rooks: place no rooks
+        on the board.
+    </p>
+
+    <div class="formula">
+        r<sub>0</sub> = 1
+    </div>
+
+    <p>
+        Therefore, for the complete 3 × 3 board:
+    </p>
+
+    <div class="formula">
+        r<sub>0</sub> = 1,
+        &nbsp;
+        r<sub>1</sub> = 9,
+        &nbsp;
+        r<sub>2</sub> = 18,
+        &nbsp;
+        r<sub>3</sub> = 6
+    </div>
+
+    <p>
+        Hence, the rook polynomial is:
+    </p>
+
+    <div class="formula">
+        R<sub>B</sub>(x)
+        =
+        1 + 9x + 18x<sup>2</sup> + 6x<sup>3</sup>
+    </div>
+
+    <div class="card">
+        <h3>Example: Complete 2 × 2 Board</h3>
+
+        <p>
+            A complete 2 × 2 board has 4 available squares, so
+            one rook has 4 possible placements. With two rooks,
+            they must occupy different rows and columns; the only
+            possibilities are the two diagonals.
+        </p>
+
+        <div class="example-board board-2x2">
+            <div class="board-row">
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+            </div>
+            <div class="board-row">
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+            </div>
+        </div>
+
+        <div class="formula">
+            r<sub>0</sub> = 1, &nbsp;
+            r<sub>1</sub> = 4, &nbsp;
+            r<sub>2</sub> = 2
+        </div>
+
+        <div class="formula">
+            R<sub>B</sub>(x) =
+            1 + 4x + 2x<sup>2</sup>
+        </div>
+    </div>
+
+</section>
+    </main>
+    <footer>
+        <p>Rook Polynomial</p>
+    </footer>
+</body>
+</html>
