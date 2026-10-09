@@ -104,45 +104,84 @@
         to place zero rooks: place no rooks at all.
     </p>
 
+    <h3>Formulas for Calculating Rook Numbers</h3>
+
+    <div class="card-container">
+        <div class="card">
+            <h3>Rook Polynomial Formula</h3>
+
+            <div class="formula">
+                R<sub>B</sub>(x) =
+                r<sub>0</sub> +
+                r<sub>1</sub>x +
+                r<sub>2</sub>x<sup>2</sup> +
+                &ctdot; +
+                r<sub>n</sub>x<sup>n</sup>
+            </div>
+
+            <p>
+                R<sub>B</sub>(x) is the rook polynomial of board
+                <em>B</em>. The number r<sub>0</sub> is always 1
+                because there is exactly one way to place zero
+                rooks: place no rooks. Each r<sub>k</sub> counts
+                the ways to place <em>k</em> non-attacking rooks,
+                and <em>x</em> is a variable used in the polynomial.
+            </p>
+
+            <p>
+                For a complete 3 × 3 board:
+            </p>
+
+            <div class="formula">
+                R<sub>B</sub>(x) =
+                1 + 9x + 18x<sup>2</sup> + 6x<sup>3</sup>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Formula for a Complete Rectangular Board</h3>
+
+            <div class="formula">
+                r<sub>k</sub> =
+                C(<em>m</em>, <em>k</em>) ×
+                C(<em>n</em>, <em>k</em>) ×
+                <em>k</em>!
+            </div>
+
+            <p>
+                This formula applies to a complete rectangular
+                board with no restricted squares. <em>m</em> is
+                the number of rows, <em>n</em> is the number of
+                columns, and <em>k</em> is the number of rooks.
+            </p>
+
+            <p>
+                C(<em>m</em>, <em>k</em>) means choosing
+                <em>k</em> rows from <em>m</em> rows, and
+                C(<em>n</em>, <em>k</em>) means choosing
+                <em>k</em> columns from <em>n</em> columns.
+                Finally, <em>k</em>! counts the ways to pair the
+                selected rows and columns to place the rooks.
+            </p>
+
+            <p>
+                For boards with restricted squares, calculate the
+                rook numbers using only the available squares.
+            </p>
+        </div>
+    </div>
+
 </section>
 
         
 
-      <section id="examples">
+    <section id="examples">
     <h2>Examples</h2>
 
     <p>
-        The following example shows how rook numbers are calculated
-        for a complete 3 × 3 board and how they are used to form
-        the rook polynomial.
+        Let us consider a complete 3 × 3 board and see how
+        the rook numbers are obtained.
     </p>
-
-
-    <!-- Visual 3 × 3 Board -->
-
-    <h3>Example Board: 3 × 3 Board</h3>
-
-    <div class="example-board">
-
-        <div class="board-row">
-            <div class="board-cell"></div>
-            <div class="board-cell"></div>
-            <div class="board-cell"></div>
-        </div>
-
-        <div class="board-row">
-            <div class="board-cell"></div>
-            <div class="board-cell"></div>
-            <div class="board-cell"></div>
-        </div>
-
-        <div class="board-row">
-            <div class="board-cell"></div>
-            <div class="board-cell"></div>
-            <div class="board-cell"></div>
-        </div>
-
-    </div>
 
 
     <!-- Example 1 -->
@@ -152,13 +191,34 @@
         <h3>Example 1: Placing One Rook</h3>
 
         <p>
-            A 3 × 3 board has a total of 9 squares.
-            When placing only one rook, it can be placed
-            on any of these 9 squares.
+            A 3 × 3 board contains 9 squares. A single rook
+            can be placed on any one of these squares.
         </p>
 
+        <div class="example-board">
+
+            <div class="board-row">
+                <div class="board-cell">♜</div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+            </div>
+
+            <div class="board-row">
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+            </div>
+
+            <div class="board-row">
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+            </div>
+
+        </div>
+
         <p>
-            Therefore, the number of ways to place one rook is:
+            The rook can be placed in any of the 9 squares.
         </p>
 
         <div class="formula">
@@ -175,26 +235,79 @@
         <h3>Example 2: Placing Two Rooks</h3>
 
         <p>
-            Two rooks must not be placed in the same row
-            or the same column.
+            Two rooks must not be in the same row or the same
+            column. Such rooks are called non-attacking rooks.
+        </p>
+
+
+        <h4>Valid Placement</h4>
+
+        <div class="example-board">
+
+            <div class="board-row">
+                <div class="board-cell">♜</div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+            </div>
+
+            <div class="board-row">
+                <div class="board-cell"></div>
+                <div class="board-cell">♜</div>
+                <div class="board-cell"></div>
+            </div>
+
+            <div class="board-row">
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+            </div>
+
+        </div>
+
+        <p>
+            These rooks are in different rows and different
+            columns, so they do not attack each other.
+        </p>
+
+
+        <h4>Invalid Placement</h4>
+
+        <div class="example-board">
+
+            <div class="board-row">
+                <div class="board-cell">♜</div>
+                <div class="board-cell">♜</div>
+                <div class="board-cell"></div>
+            </div>
+
+            <div class="board-row">
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+            </div>
+
+            <div class="board-row">
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+            </div>
+
+        </div>
+
+        <p>
+            These rooks are in the same row, so they attack each
+            other. This is not counted as a valid placement.
+        </p>
+
+
+        <p>
+            Now we count all possible valid placements.
         </p>
 
         <p>
-            First, choose 2 different rows.
-            There are 3 possible pairs of rows:
-        </p>
-
-        <p>
-            (Row 1, Row 2), (Row 1, Row 3), (Row 2, Row 3)
-        </p>
-
-        <p>
-            Similarly, there are 3 possible pairs of columns.
-        </p>
-
-        <p>
-            For each selected pair of rows and columns,
-            the two rooks can be arranged in 2 different ways.
+            Choose 2 different rows → 3 ways<br>
+            Choose 2 different columns → 3 ways<br>
+            Arrange the 2 rooks → 2 ways
         </p>
 
         <div class="formula">
@@ -203,7 +316,7 @@
 
         <p>
             Therefore, there are 18 ways to place two
-            non-attacking rooks on a 3 × 3 board.
+            non-attacking rooks.
         </p>
 
     </div>
@@ -216,15 +329,42 @@
         <h3>Example 3: Placing Three Rooks</h3>
 
         <p>
-            When placing three rooks on a 3 × 3 board,
-            each rook must occupy a different row and
-            a different column.
+            For three rooks, each rook must be placed in a
+            different row and a different column.
+        </p>
+
+        <div class="example-board">
+
+            <div class="board-row">
+                <div class="board-cell">♜</div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+            </div>
+
+            <div class="board-row">
+                <div class="board-cell"></div>
+                <div class="board-cell">♜</div>
+                <div class="board-cell"></div>
+            </div>
+
+            <div class="board-row">
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+                <div class="board-cell">♜</div>
+            </div>
+
+        </div>
+
+        <p>
+            One possible arrangement is shown above. Since no
+            two rooks share a row or column, all three rooks
+            are non-attacking.
         </p>
 
         <p>
-            The first rook has 3 choices.
-            After choosing its row and column, the second
-            rook has 2 choices, and the third rook has 1 choice.
+            The first rook has 3 choices, the second has 2
+            remaining choices, and the third has 1 remaining
+            choice.
         </p>
 
         <div class="formula">
@@ -244,7 +384,8 @@
     <h3>Complete Rook Polynomial</h3>
 
     <p>
-        We also have:
+        There is one way to place zero rooks: place no rooks
+        on the board.
     </p>
 
     <div class="formula">
@@ -252,13 +393,7 @@
     </div>
 
     <p>
-        There is exactly one way to place zero rooks:
-        place no rooks on the board.
-    </p>
-
-    <p>
-        Therefore, the rook numbers for the complete
-        3 × 3 board are:
+        Therefore, for the complete 3 × 3 board:
     </p>
 
     <div class="formula">
@@ -272,7 +407,7 @@
     </div>
 
     <p>
-        Substituting these values into the rook polynomial:
+        Hence, the rook polynomial is:
     </p>
 
     <div class="formula">
@@ -281,35 +416,620 @@
         1 + 9x + 18x<sup>2</sup> + 6x<sup>3</sup>
     </div>
 
+</section>
+
+      <section id="experiments">
+    <h2>Experiments & Activities</h2>
+
     <p>
-        This polynomial represents the number of ways to place
-        different numbers of non-attacking rooks on the board.
+        Test your understanding of rook placement through these
+        short activities. Try to answer before revealing the
+        explanation.
+    </p>
+
+
+    <!-- ACTIVITY 1 -->
+
+    <div class="activity-card">
+
+        <h3>Activity 1: Can the Rooks Attack?</h3>
+
+        <p>
+            Look at the board below. Are the two rooks
+            attacking each other?
+        </p>
+
+        <div class="example-board">
+
+            <div class="board-row">
+                <div class="board-cell">♜</div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+            </div>
+
+            <div class="board-row">
+                <div class="board-cell"></div>
+                <div class="board-cell">♜</div>
+                <div class="board-cell"></div>
+            </div>
+
+            <div class="board-row">
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+            </div>
+
+        </div>
+
+
+        <div class="activity-question">
+
+            <p><strong>Your answer:</strong></p>
+
+            <button type="button"
+                    class="answer-button"
+                    data-answer="not-attacking"
+                    data-activity="activity1">
+                Not Attacking
+            </button>
+
+            <button type="button"
+                    class="answer-button"
+                    data-answer="attacking"
+                    data-activity="activity1">
+                Attacking
+            </button>
+
+        </div>
+
+
+        <div id="activity1-result" class="activity-result">
+        </div>
+
+    </div>
+
+
+    <!-- ACTIVITY 2 -->
+
+    <div class="activity-card">
+
+        <h3>Activity 2: Find the Valid Placement</h3>
+
+        <p>
+            Which of the following arrangements contains
+            two non-attacking rooks?
+        </p>
+
+
+        <div class="activity-options">
+
+            <!-- Option A -->
+
+            <button type="button"
+                    class="board-option"
+                    data-answer="wrong"
+                    data-activity="activity2">
+
+                <div class="mini-board">
+
+                    <div class="mini-row">
+                        <div class="mini-cell">♜</div>
+                        <div class="mini-cell">♜</div>
+                        <div class="mini-cell"></div>
+                    </div>
+
+                    <div class="mini-row">
+                        <div class="mini-cell"></div>
+                        <div class="mini-cell"></div>
+                        <div class="mini-cell"></div>
+                    </div>
+
+                    <div class="mini-row">
+                        <div class="mini-cell"></div>
+                        <div class="mini-cell"></div>
+                        <div class="mini-cell"></div>
+                    </div>
+
+                </div>
+
+                <span>Arrangement A</span>
+
+            </button>
+
+
+            <!-- Option B -->
+
+            <button type="button"
+                    class="board-option"
+                    data-answer="correct"
+                    data-activity="activity2">
+
+                <div class="mini-board">
+
+                    <div class="mini-row">
+                        <div class="mini-cell">♜</div>
+                        <div class="mini-cell"></div>
+                        <div class="mini-cell"></div>
+                    </div>
+
+                    <div class="mini-row">
+                        <div class="mini-cell"></div>
+                        <div class="mini-cell">♜</div>
+                        <div class="mini-cell"></div>
+                    </div>
+
+                    <div class="mini-row">
+                        <div class="mini-cell"></div>
+                        <div class="mini-cell"></div>
+                        <div class="mini-cell"></div>
+                    </div>
+
+                </div>
+
+                <span>Arrangement B</span>
+
+            </button>
+
+
+            <!-- Option C -->
+
+            <button type="button"
+                    class="board-option"
+                    data-answer="wrong"
+                    data-activity="activity2">
+
+                <div class="mini-board">
+
+                    <div class="mini-row">
+                        <div class="mini-cell">♜</div>
+                        <div class="mini-cell"></div>
+                        <div class="mini-cell"></div>
+                    </div>
+
+                    <div class="mini-row">
+                        <div class="mini-cell"></div>
+                        <div class="mini-cell"></div>
+                        <div class="mini-cell"></div>
+                    </div>
+
+                    <div class="mini-row">
+                        <div class="mini-cell">♜</div>
+                        <div class="mini-cell"></div>
+                        <div class="mini-cell"></div>
+                    </div>
+
+                </div>
+
+                <span>Arrangement C</span>
+
+            </button>
+
+        </div>
+
+
+        <div id="activity2-result" class="activity-result">
+        </div>
+
+    </div>
+
+
+    <!-- ACTIVITY 3 -->
+        <!-- ACTIVITY 3 -->
+
+<div class="activity-card">
+
+    <h3>Activity 3: Count the Placements</h3>
+
+    <p>
+        Consider the 2 × 2 board below. How many ways can
+        one non-attacking rook be placed?
+    </p>
+
+    <div class="example-board board-2x2">
+
+        <div class="board-row">
+            <div class="board-cell"></div>
+            <div class="board-cell"></div>
+        </div>
+
+        <div class="board-row">
+            <div class="board-cell"></div>
+            <div class="board-cell"></div>
+        </div>
+
+    </div>
+
+    <p>
+        Choose the correct answer:
+    </p>
+
+    <div class="choice-row">
+
+        <button type="button"
+                class="count-button"
+                data-answer="2"
+                data-activity="activity3">
+            2
+        </button>
+
+        <button type="button"
+                class="count-button"
+                data-answer="4"
+                data-activity="activity3">
+            4
+        </button>
+
+        <button type="button"
+                class="count-button"
+                data-answer="6"
+                data-activity="activity3">
+            6
+        </button>
+
+    </div>
+
+    <div id="activity3-result" class="activity-result">
+    </div>
+
+</div>
+
+    <!-- ACTIVITY 4 -->
+
+    <div class="activity-card">
+
+        <h3>Activity 4: What Happens When Squares Are Restricted?</h3>
+
+        <p>
+            The squares marked with ✕ cannot be used for
+            placing rooks.
+        </p>
+
+
+        <div class="example-board">
+
+            <div class="board-row">
+                <div class="board-cell"></div>
+                <div class="board-cell">✕</div>
+                <div class="board-cell"></div>
+            </div>
+
+            <div class="board-row">
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+                <div class="board-cell">✕</div>
+            </div>
+
+            <div class="board-row">
+                <div class="board-cell">✕</div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+            </div>
+
+        </div>
+
+
+        <p>
+            How many squares are available for placing one rook?
+        </p>
+
+
+        <div class="choice-row">
+
+            <button type="button"
+                    class="count-button"
+                    data-answer="3"
+                    data-activity="activity4">
+                3
+            </button>
+
+            <button type="button"
+                    class="count-button"
+                    data-answer="6"
+                    data-activity="activity4">
+                6
+            </button>
+
+            <button type="button"
+                    class="count-button"
+                    data-answer="9"
+                    data-activity="activity4">
+                9
+            </button>
+
+        </div>
+
+
+        <div id="activity4-result" class="activity-result">
+        </div>
+
+    </div>
+
+
+    <h3>What Do We Learn?</h3>
+
+    <p>
+        These activities show that a valid rook placement
+        requires different rows and columns, and that the
+        number of possible placements depends on the available
+        squares on the board.
     </p>
 
 </section>
 
-        <section id="experiments">
-            <h2>Experiments & Activities</h2>
+<section id="tool">
 
-            <p>
-                Interactive experiments will be added here.
-            </p>
-        </section>
+    <h2>Interactive Tool</h2>
 
-        <section id="tool">
-            <h2>Interactive Tool</h2>
+    <p>
+        Create your own board and explore how rook placements
+        affect the rook polynomial.
+    </p>
 
-            <p>
-                The interactive rook board will be added here.
-            </p>
-        </section>
+    <div class="tool-card">
+
+        <h3>Step 1: Choose Board Size</h3>
+
+        <label for="board-size">
+            Select the size of the board:
+        </label>
+
+        <select id="board-size">
+            <option value="2">2 × 2</option>
+            <option value="3" selected>3 × 3</option>
+            <option value="4">4 × 4</option>
+            <option value="5">5 × 5</option>
+        </select>
+
+        <button type="button" id="create-board">
+            Create Board
+        </button>
+
+    </div>
+
+
+    
+
+    <div class="tool-card">
+
+   <h3>Step 2: Build & Explore Your Board</h3>
+
+<p>
+    Restrict squares to create a custom board, or place rooks
+    to experiment with non-attacking arrangements.
+</p>
+
+<p>
+    <strong>Note:</strong> The rooks you place are used to
+    check a particular arrangement. They do not change the
+    rook polynomial.
+</p>
+    <div class="choice-row">
+
+        <button type="button" id="rook-mode">
+            ♜ Place Rook
+        </button>
+
+        <button type="button" id="restrict-mode">
+            ✕ Restrict Square
+        </button>
+
+    </div>
+
+    <p id="mode-instruction">
+        Current mode: Place Rook
+    </p>
+
+    <div id="interactive-board">
+        <!-- Board will be created here -->
+    </div>
+
+</div>
+<button type="button" id="check-rooks">
+    Check Rook Placement
+</button>
+<button type="button" id="reset-board">
+    Reset Board
+</button>
+<div id="rook-result" class="activity-result"></div>
+
+
+    <div class="tool-card">
+
+    <h3>Step 3: Calculate Rook Polynomial</h3>
+
+<p>
+    The rook polynomial describes all possible non-attacking
+    rook placements on the available squares of your board.
+</p>
+
+<p>
+    The calculation considers every possible number of rooks,
+    from 0 up to the size of the board.
+</p>
+    <button type="button" id="calculate-rook-numbers">
+        Calculate Rook Numbers
+    </button>
+
+    <div id="polynomial-result" class="activity-result"></div>
+
+</div>
+
+</section>
 
         <section id="exercises">
             <h2>Exercises</h2>
 
             <p>
-                Exercise questions will be added here.
+                Test your understanding of rook polynomials. Select one answer
+                for each question, then submit the quiz to see your score and
+                explanations.
             </p>
+
+            <div class="score-box" aria-live="polite">
+                Score: <span id="quiz-score">0</span> / 50
+            </div>
+
+            <form id="quiz-form">
+                <div class="activity-card quiz-question">
+                    <h3 class="quiz-question-heading">
+                        Question 1 <span class="difficulty-badge easy">Easy</span>
+                    </h3>
+                    <p><strong>What does the rook number r<sub>k</sub> represent?</strong></p>
+                    <fieldset class="quiz-options">
+                        <legend class="visually-hidden">Choose an answer for Question 1</legend>
+                        <label class="exercise-answer">
+                            <input type="radio" name="q1" value="squares">
+                            <span><strong>A.</strong> The number of squares on the board</span>
+                        </label>
+                        <label class="exercise-answer">
+                            <input type="radio" name="q1" value="placements">
+                            <span><strong>B.</strong> The number of ways to place k non-attacking rooks</span>
+                        </label>
+                        <label class="exercise-answer">
+                            <input type="radio" name="q1" value="total-rooks">
+                            <span><strong>C.</strong> The total number of rooks on the board</span>
+                        </label>
+                    </fieldset>
+                    <div id="exercise1-result" class="activity-result quiz-question-feedback"></div>
+                </div>
+
+                <div class="activity-card quiz-question">
+                    <h3 class="quiz-question-heading">
+                        Question 2 <span class="difficulty-badge easy">Easy</span>
+                    </h3>
+                    <p><strong>Which arrangement shows two non-attacking rooks?</strong></p>
+                    <fieldset class="quiz-options quiz-option-grid">
+                        <legend class="visually-hidden">Choose an arrangement for Question 2</legend>
+                        <label class="exercise-answer quiz-board-option">
+                            <input type="radio" name="q2" value="a">
+                            <span class="quiz-board-label">A</span>
+                            <span class="quiz-board" role="img" aria-label="Rooks at row 1 column 1 and row 1 column 3">
+                                <span class="quiz-cell">♜</span><span class="quiz-cell"></span><span class="quiz-cell">♜</span>
+                                <span class="quiz-cell"></span><span class="quiz-cell"></span><span class="quiz-cell"></span>
+                                <span class="quiz-cell"></span><span class="quiz-cell"></span><span class="quiz-cell"></span>
+                            </span>
+                            <span>Both share a row</span>
+                        </label>
+                        <label class="exercise-answer quiz-board-option">
+                            <input type="radio" name="q2" value="b">
+                            <span class="quiz-board-label">B</span>
+                            <span class="quiz-board" role="img" aria-label="Rooks at row 1 column 1 and row 2 column 2">
+                                <span class="quiz-cell">♜</span><span class="quiz-cell"></span><span class="quiz-cell"></span>
+                                <span class="quiz-cell"></span><span class="quiz-cell">♜</span><span class="quiz-cell"></span>
+                                <span class="quiz-cell"></span><span class="quiz-cell"></span><span class="quiz-cell"></span>
+                            </span>
+                            <span>Different rows and columns</span>
+                        </label>
+                        <label class="exercise-answer quiz-board-option">
+                            <input type="radio" name="q2" value="c">
+                            <span class="quiz-board-label">C</span>
+                            <span class="quiz-board" role="img" aria-label="Rooks at row 1 column 2 and row 3 column 2">
+                                <span class="quiz-cell"></span><span class="quiz-cell">♜</span><span class="quiz-cell"></span>
+                                <span class="quiz-cell"></span><span class="quiz-cell"></span><span class="quiz-cell"></span>
+                                <span class="quiz-cell"></span><span class="quiz-cell">♜</span><span class="quiz-cell"></span>
+                            </span>
+                            <span>Both share a column</span>
+                        </label>
+                    </fieldset>
+                    <div id="exercise2-result" class="activity-result quiz-question-feedback"></div>
+                </div>
+
+                <div class="activity-card quiz-question">
+                    <h3 class="quiz-question-heading">
+                        Question 3 <span class="difficulty-badge medium">Medium</span>
+                    </h3>
+                    <p>
+                        <strong>For the board below, what is r<sub>1</sub>?</strong>
+                        There are four allowed squares; squares marked × are restricted.
+                    </p>
+                    <div class="quiz-board quiz-board--3 quiz-board-diagram" role="img" aria-label="Two by three board. Top row has two allowed squares and one restricted square. Bottom row has one restricted square and two allowed squares.">
+                        <span class="quiz-cell"></span><span class="quiz-cell"></span><span class="quiz-cell restricted">×</span>
+                        <span class="quiz-cell restricted">×</span><span class="quiz-cell"></span><span class="quiz-cell"></span>
+                    </div>
+                    <fieldset class="quiz-options">
+                        <legend class="visually-hidden">Choose an answer for Question 3</legend>
+                        <label class="exercise-answer">
+                            <input type="radio" name="q3" value="3">
+                            <span><strong>A.</strong> 3</span>
+                        </label>
+                        <label class="exercise-answer">
+                            <input type="radio" name="q3" value="4">
+                            <span><strong>B.</strong> 4</span>
+                        </label>
+                        <label class="exercise-answer">
+                            <input type="radio" name="q3" value="5">
+                            <span><strong>C.</strong> 5</span>
+                        </label>
+                    </fieldset>
+                    <div id="exercise3-result" class="activity-result quiz-question-feedback"></div>
+                </div>
+
+                <div class="activity-card quiz-question">
+                    <h3 class="quiz-question-heading">
+                        Question 4 <span class="difficulty-badge medium">Medium</span>
+                    </h3>
+                    <p>
+                        <strong>How many ways can two non-attacking rooks be placed on a complete 2 × 2 board?</strong>
+                    </p>
+                    <div class="quiz-board quiz-board--2 quiz-board-diagram" role="img" aria-label="Complete two by two board with all four squares available">
+                        <span class="quiz-cell"></span><span class="quiz-cell"></span>
+                        <span class="quiz-cell"></span><span class="quiz-cell"></span>
+                    </div>
+                    <fieldset class="quiz-options">
+                        <legend class="visually-hidden">Choose an answer for Question 4</legend>
+                        <label class="exercise-answer">
+                            <input type="radio" name="q4" value="1">
+                            <span><strong>A.</strong> 1</span>
+                        </label>
+                        <label class="exercise-answer">
+                            <input type="radio" name="q4" value="2">
+                            <span><strong>B.</strong> 2</span>
+                        </label>
+                        <label class="exercise-answer">
+                            <input type="radio" name="q4" value="4">
+                            <span><strong>C.</strong> 4</span>
+                        </label>
+                    </fieldset>
+                    <div id="exercise4-result" class="activity-result quiz-question-feedback"></div>
+                </div>
+
+                <div class="activity-card quiz-question">
+                    <h3 class="quiz-question-heading">
+                        Question 5 <span class="difficulty-badge hard">Hard</span>
+                    </h3>
+                    <p>
+                        <strong>What is the rook polynomial for the board below?</strong>
+                        The lower-right square is restricted.
+                    </p>
+                    <div class="quiz-board quiz-board--2 quiz-board-diagram" role="img" aria-label="Two by two board with the lower-right square restricted and the other three squares allowed">
+                        <span class="quiz-cell"></span><span class="quiz-cell"></span>
+                        <span class="quiz-cell"></span><span class="quiz-cell restricted">×</span>
+                    </div>
+                    <fieldset class="quiz-options">
+                        <legend class="visually-hidden">Choose an answer for Question 5</legend>
+                        <label class="exercise-answer">
+                            <input type="radio" name="q5" value="one-plus-three-x-plus-x-squared">
+                            <span><strong>A.</strong> R<sub>B</sub>(x) = 1 + 3x + x<sup>2</sup></span>
+                        </label>
+                        <label class="exercise-answer">
+                            <input type="radio" name="q5" value="one-plus-two-x">
+                            <span><strong>B.</strong> R<sub>B</sub>(x) = 1 + 2x</span>
+                        </label>
+                        <label class="exercise-answer">
+                            <input type="radio" name="q5" value="one-plus-three-x-plus-two-x-squared">
+                            <span><strong>C.</strong> R<sub>B</sub>(x) = 1 + 3x + 2x<sup>2</sup></span>
+                        </label>
+                    </fieldset>
+                    <div id="exercise5-result" class="activity-result quiz-question-feedback"></div>
+                </div>
+
+                <div class="quiz-actions">
+                    <button type="submit" id="submit-quiz">Submit Quiz</button>
+                    <button type="button" id="restart-quiz" class="secondary-button">Restart Quiz</button>
+                </div>
+            </form>
+
+            <div id="quiz-result" class="activity-result quiz-summary" role="status" aria-live="polite"></div>
         </section>
 
     </main>
