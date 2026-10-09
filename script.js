@@ -784,130 +784,249 @@ createBoard();
 // ======================================================
 
 if (document.getElementById("quiz-form")) {
-const quizForm = document.getElementById("quiz-form");
-const quizScore = document.getElementById("quiz-score");
-const quizResult = document.getElementById("quiz-result");
-const submitQuizButton = document.getElementById("submit-quiz");
-const restartQuizButton = document.getElementById("restart-quiz");
-let quizSubmitted = false;
+    const quizForm = document.getElementById("quiz-form");
+    const quizScore = document.getElementById("quiz-score");
+    const quizScoreBox = document.getElementById("quiz-score-box");
+    const quizResult = document.getElementById("quiz-result");
+    const quizResultsScreen = document.getElementById("quiz-results-screen");
+    const quizReviewScreen = document.getElementById("quiz-review-screen");
+    const quizQuestionScreen = document.getElementById("quiz-question-screen");
+    const questionCount = document.getElementById("quiz-question-count");
+    const progressBar = document.getElementById("quiz-progress-bar");
+    const questionList = document.getElementById("quiz-question-list");
+    const questionCards = Array.from(questionList.querySelectorAll(".quiz-question"));
+    const quizReview = document.getElementById("quiz-review");
+    const quizNavigation = document.getElementById("quiz-navigation");
+    const quizActions = quizForm.querySelector(".quiz-actions");
+    const previousQuestionButton = document.getElementById("previous-question");
+    const nextQuestionButton = document.getElementById("next-question");
+    const submitQuizButton = document.getElementById("submit-quiz");
+    const reviewAnswersButton = document.getElementById("review-answers");
+    const backToResultsButton = document.getElementById("back-to-results");
+    const restartQuizButton = document.getElementById("restart-quiz");
+    let currentQuestionIndex = 0;
+    let quizSubmitted = false;
 
-const quizQuestions = [
-    {
-        name: "q1",
-        answer: "placements",
-        answerLabel: "B. The number of ways to place k non-attacking rooks",
-        feedbackId: "exercise1-result",
-        explanation: "By definition, r<sub>k</sub> counts the placements of exactly k rooks on allowed squares with no two rooks sharing a row or column."
-    },
-    {
-        name: "q2",
-        answer: "b",
-        answerLabel: "B. The rooks are in different rows and different columns",
-        feedbackId: "exercise2-result",
-        explanation: "In arrangement B, the rooks occupy different rows and columns. Arrangements A and C share a row and a column, respectively."
-    },
-    {
-        name: "q3",
-        answer: "4",
-        answerLabel: "B. 4",
-        feedbackId: "exercise3-result",
-        explanation: "For one rook, every allowed square is a possible placement. The board has four allowed squares, so r<sub>1</sub> = 4."
-    },
-    {
-        name: "q4",
-        answer: "2",
-        answerLabel: "B. 2",
-        feedbackId: "exercise4-result",
-        explanation: "The two rooks must occupy different rows and columns. The two valid placements are the two diagonals, so r<sub>2</sub> = 2."
-    },
-    {
-        name: "q5",
-        answer: "one-plus-three-x-plus-x-squared",
-        answerLabel: "A. R<sub>B</sub>(x) = 1 + 3x + x<sup>2</sup>",
-        feedbackId: "exercise5-result",
-        explanation: "There is one way to place zero rooks, three allowed squares for one rook, and one non-attacking placement of two rooks. Thus r<sub>0</sub> = 1, r<sub>1</sub> = 3, r<sub>2</sub> = 1."
+    const quizQuestions = [
+        {
+            name: "q1",
+            answer: "placements",
+            answerLabel: "B. The number of ways to place k non-attacking rooks",
+            feedbackId: "exercise1-result",
+            explanation: "By definition, r<sub>k</sub> counts the placements of exactly k rooks on allowed squares with no two rooks sharing a row or column."
+        },
+        {
+            name: "q2",
+            answer: "b",
+            answerLabel: "B. The rooks are in different rows and different columns",
+            feedbackId: "exercise2-result",
+            explanation: "In arrangement B, the rooks occupy different rows and columns. Arrangements A and C share a row and a column, respectively."
+        },
+        {
+            name: "q3",
+            answer: "4",
+            answerLabel: "B. 4",
+            feedbackId: "exercise3-result",
+            explanation: "For one rook, every allowed square is a possible placement. The board has four allowed squares, so r<sub>1</sub> = 4."
+        },
+        {
+            name: "q4",
+            answer: "2",
+            answerLabel: "B. 2",
+            feedbackId: "exercise4-result",
+            explanation: "The two rooks must occupy different rows and columns. The two valid placements are the two diagonals, so r<sub>2</sub> = 2."
+        },
+        {
+            name: "q5",
+            answer: "one-plus-three-x-plus-x-squared",
+            answerLabel: "A. R<sub>B</sub>(x) = 1 + 3x + x<sup>2</sup>",
+            feedbackId: "exercise5-result",
+            explanation: "There is one way to place zero rooks, three allowed squares for one rook, and one non-attacking placement of two rooks. Thus r<sub>0</sub> = 1, r<sub>1</sub> = 3, r<sub>2</sub> = 1."
+        }
+    ];
+
+    function renderQuestion() {
+        const isFinalQuestion = currentQuestionIndex === questionCards.length - 1;
+
+        questionCards.forEach((card, index) => {
+            card.hidden = index !== currentQuestionIndex;
+        });
+
+        questionCount.textContent = `Question ${currentQuestionIndex + 1} of ${questionCards.length}`;
+        progressBar.value = currentQuestionIndex + 1;
+        previousQuestionButton.disabled = currentQuestionIndex === 0;
+        nextQuestionButton.disabled = isFinalQuestion;
+        submitQuizButton.hidden = !isFinalQuestion;
     }
-];
 
-quizForm.addEventListener("submit", event => {
-    event.preventDefault();
-
-    if (quizSubmitted) {
-        return;
+    function updateSelectedAnswerStyles() {
+        quizForm.querySelectorAll(".exercise-answer").forEach(label => {
+            const input = label.querySelector('input[type="radio"]');
+            label.classList.toggle("is-selected", input.checked);
+        });
     }
 
-    quizSubmitted = true;
-    let score = 0;
+    quizForm.addEventListener("change", event => {
+        if (event.target.matches('input[type="radio"]') && !quizSubmitted) {
+            updateSelectedAnswerStyles();
+        }
+    });
 
-    quizQuestions.forEach(question => {
-        const selectedAnswer = quizForm.querySelector(
-            `input[name="${question.name}"]:checked`
-        );
-        const isCorrect = selectedAnswer?.value === question.answer;
-        const feedback = document.getElementById(question.feedbackId);
+    previousQuestionButton.addEventListener("click", () => {
+        if (!quizSubmitted && currentQuestionIndex > 0) {
+            currentQuestionIndex -= 1;
+            renderQuestion();
+        }
+    });
 
-        if (isCorrect) {
-            score += 10;
-            feedback.innerHTML = `
-                <strong>✓ Correct.</strong><br>
-                ${question.explanation}
-            `;
-        } else {
-            feedback.innerHTML = `
-                <strong>${selectedAnswer ? "✗ Not quite." : "Not answered."}</strong><br>
-                Correct answer: ${question.answerLabel}.<br>
-                ${question.explanation}
-            `;
+    nextQuestionButton.addEventListener("click", () => {
+        if (!quizSubmitted && currentQuestionIndex < questionCards.length - 1) {
+            currentQuestionIndex += 1;
+            renderQuestion();
+        }
+    });
+
+    quizForm.addEventListener("submit", event => {
+        event.preventDefault();
+
+        if (quizSubmitted || currentQuestionIndex !== questionCards.length - 1) {
+            return;
         }
 
-        feedback.classList.add("show");
+        quizSubmitted = true;
+        let score = 0;
+        let correctCount = 0;
+
+        quizQuestions.forEach((question, questionIndex) => {
+            const selectedAnswer = quizForm.querySelector(
+                `input[name="${question.name}"]:checked`
+            );
+            const isCorrect = selectedAnswer?.value === question.answer;
+            const correctAnswer = quizForm.querySelector(
+                `input[name="${question.name}"][value="${question.answer}"]`
+            );
+            const feedback = document.getElementById(question.feedbackId);
+
+            questionCards[questionIndex].querySelectorAll(".exercise-answer").forEach(label => {
+                label.classList.remove("is-selected");
+                label.classList.toggle("is-correct", label.contains(correctAnswer));
+                label.classList.toggle("is-incorrect", label.contains(selectedAnswer) && !isCorrect);
+
+                const stateLabel = document.createElement("span");
+                stateLabel.className = "answer-state";
+                if (label.contains(correctAnswer)) {
+                    stateLabel.textContent = isCorrect ? "✓ Your answer — correct" : "✓ Correct answer";
+                } else if (label.contains(selectedAnswer)) {
+                    stateLabel.textContent = "✗ Your answer — incorrect";
+                }
+                if (stateLabel.textContent) {
+                    label.append(stateLabel);
+                }
+            });
+
+            if (isCorrect) {
+                score += 10;
+                correctCount += 1;
+                feedback.innerHTML = `
+                    <strong>✓ Correct — 10/10 marks.</strong><br>
+                    ${question.explanation}
+                `;
+            } else if (selectedAnswer) {
+                feedback.innerHTML = `
+                    <strong>✗ Incorrect — 0/10 marks.</strong><br>
+                    Your answer: ${selectedAnswer.closest("label").innerText}.<br>
+                    Correct answer: ${question.answerLabel}.<br>
+                    ${question.explanation}
+                `;
+            } else {
+                feedback.innerHTML = `
+                    <strong>No answer selected — 0/10 marks.</strong><br>
+                    Correct answer: ${question.answerLabel}.<br>
+                    ${question.explanation}
+                `;
+            }
+
+            feedback.classList.add("show");
+        });
+
+        quizScore.textContent = String(score);
+        quizScoreBox.hidden = false;
+
+        let performanceMessage;
+        if (score === 50) {
+            performanceMessage = "Perfect score! You have an excellent understanding of rook polynomials.";
+        } else if (score >= 40) {
+            performanceMessage = "Excellent work! You have a strong grasp of the concepts.";
+        } else if (score >= 20) {
+            performanceMessage = "Good effort! Review the explanations and try again to strengthen your understanding.";
+        } else {
+            performanceMessage = "Keep practicing! Review the explanations and the examples above, then try again.";
+        }
+
+        quizResult.innerHTML = `
+            <strong>Your Score: ${score}/50</strong><br>
+            ${correctCount} out of ${quizQuestions.length} answers correct.<br>
+            ${performanceMessage}
+        `;
+        quizResult.classList.add("show");
+        quizForm.querySelectorAll('input[type="radio"]').forEach(input => {
+            input.disabled = true;
+        });
+
+        questionCount.textContent = `Quiz complete — ${questionCards.length} questions`;
+        quizNavigation.hidden = true;
+        submitQuizButton.hidden = true;
+        quizQuestionScreen.hidden = true;
+        quizResultsScreen.hidden = false;
     });
 
-    quizScore.textContent = String(score);
-
-    let performanceMessage;
-    if (score === 50) {
-        performanceMessage = "Perfect score! You have an excellent understanding of rook polynomials.";
-    } else if (score >= 40) {
-        performanceMessage = "Excellent work! You have a strong grasp of the concepts.";
-    } else if (score >= 20) {
-        performanceMessage = "Good effort! Review the explanations and try again to strengthen your understanding.";
-    } else {
-        performanceMessage = "Keep practicing! Review the explanations and the examples above, then try again.";
-    }
-
-    quizResult.innerHTML = `
-        <strong>Quiz complete: ${score} / 50 points.</strong><br>
-        ${performanceMessage}
-    `;
-    quizResult.classList.add("show");
-    submitQuizButton.disabled = true;
-    quizForm.querySelectorAll('input[type="radio"]').forEach(input => {
-        input.disabled = true;
-    });
-});
-
-restartQuizButton.addEventListener("click", () => {
-    quizForm.reset();
-    quizSubmitted = false;
-    quizScore.textContent = "0";
-    quizResult.textContent = "";
-    quizResult.classList.remove("show");
-    submitQuizButton.disabled = false;
-
-    quizForm.querySelectorAll('input[type="radio"]').forEach(input => {
-        input.disabled = false;
+    reviewAnswersButton.addEventListener("click", () => {
+        if (quizSubmitted) {
+            questionCards.forEach(card => {
+                card.hidden = false;
+            });
+            quizReview.append(questionList);
+            quizResultsScreen.hidden = true;
+            quizReviewScreen.hidden = false;
+        }
     });
 
-    quizQuestions.forEach(question => {
-        const feedback = document.getElementById(question.feedbackId);
-        feedback.textContent = "";
-        feedback.classList.remove("show");
+    backToResultsButton.addEventListener("click", () => {
+        quizForm.insertBefore(questionList, quizActions);
+        quizReviewScreen.hidden = true;
+        quizResultsScreen.hidden = false;
     });
 
-    document.getElementById("exercises").scrollIntoView({
-        behavior: "smooth",
-        block: "start"
+    restartQuizButton.addEventListener("click", () => {
+        quizForm.insertBefore(questionList, quizActions);
+        quizResultsScreen.hidden = true;
+        quizReviewScreen.hidden = true;
+        quizQuestionScreen.hidden = false;
+        quizForm.reset();
+        currentQuestionIndex = 0;
+        quizSubmitted = false;
+        quizScore.textContent = "0";
+        quizScoreBox.hidden = true;
+        quizResult.textContent = "";
+        quizResult.classList.remove("show");
+
+        quizForm.querySelectorAll('input[type="radio"]').forEach(input => {
+            input.disabled = false;
+        });
+        quizForm.querySelectorAll(".exercise-answer").forEach(label => {
+            label.classList.remove("is-selected", "is-correct", "is-incorrect");
+            label.querySelectorAll(".answer-state").forEach(stateLabel => stateLabel.remove());
+        });
+
+        quizQuestions.forEach(question => {
+            const feedback = document.getElementById(question.feedbackId);
+            feedback.textContent = "";
+            feedback.classList.remove("show");
+        });
+
+        quizNavigation.hidden = false;
+        renderQuestion();
     });
-});
+
+    renderQuestion();
 }

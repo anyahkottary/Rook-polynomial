@@ -27,15 +27,18 @@
 
             <p>
                 Test your understanding of rook polynomials. Select one answer
-                for each question, then submit the quiz to see your score and
-                explanations.
+                for each question, then submit the quiz on Question 5 to see
+                your score and explanations.
             </p>
 
-            <div class="score-box" aria-live="polite">
-                Score: <span id="quiz-score">0</span> / 50
+            <div id="quiz-question-screen">
+            <div class="quiz-progress">
+                <p id="quiz-question-count" aria-live="polite">Question 1 of 5</p>
+                <progress id="quiz-progress-bar" max="5" value="1" aria-label="Quiz progress"></progress>
             </div>
 
-            <form id="quiz-form">
+            <form id="quiz-form" novalidate>
+                <div id="quiz-question-list">
                 <div class="activity-card quiz-question">
                     <h3 class="quiz-question-heading">
                         Question 1 <span class="difficulty-badge easy">Easy</span>
@@ -59,7 +62,7 @@
                     <div id="exercise1-result" class="activity-result quiz-question-feedback"></div>
                 </div>
 
-                <div class="activity-card quiz-question">
+                <div class="activity-card quiz-question" hidden>
                     <h3 class="quiz-question-heading">
                         Question 2 <span class="difficulty-badge easy">Easy</span>
                     </h3>
@@ -100,7 +103,7 @@
                     <div id="exercise2-result" class="activity-result quiz-question-feedback"></div>
                 </div>
 
-                <div class="activity-card quiz-question">
+                <div class="activity-card quiz-question" hidden>
                     <h3 class="quiz-question-heading">
                         Question 3 <span class="difficulty-badge medium">Medium</span>
                     </h3>
@@ -130,7 +133,7 @@
                     <div id="exercise3-result" class="activity-result quiz-question-feedback"></div>
                 </div>
 
-                <div class="activity-card quiz-question">
+                <div class="activity-card quiz-question" hidden>
                     <h3 class="quiz-question-heading">
                         Question 4 <span class="difficulty-badge medium">Medium</span>
                     </h3>
@@ -159,7 +162,7 @@
                     <div id="exercise4-result" class="activity-result quiz-question-feedback"></div>
                 </div>
 
-                <div class="activity-card quiz-question">
+                <div class="activity-card quiz-question" hidden>
                     <h3 class="quiz-question-heading">
                         Question 5 <span class="difficulty-badge hard">Hard</span>
                     </h3>
@@ -188,15 +191,41 @@
                     </fieldset>
                     <div id="exercise5-result" class="activity-result quiz-question-feedback"></div>
                 </div>
+                </div>
 
                 <div class="quiz-actions">
-                    <button type="submit" id="submit-quiz">Submit Quiz</button>
-                    <button type="button" id="restart-quiz" class="secondary-button">Retake Quiz</button>
+                    <div id="quiz-navigation" class="quiz-navigation">
+                        <button type="button" id="previous-question" class="secondary-button" disabled>Previous</button>
+                        <button type="button" id="next-question">Next</button>
+                    </div>
+                    <button type="submit" id="submit-quiz" hidden>Submit Quiz</button>
                 </div>
             </form>
+            </div>
 
-            <div id="quiz-result" class="activity-result quiz-summary" role="status" aria-live="polite"></div>
+            <div id="quiz-results-screen" hidden>
+                <div id="quiz-score-box" class="score-box" aria-live="polite" hidden>
+                    Your Score: <span id="quiz-score">0</span>/50
+                </div>
+                <div id="quiz-result" class="activity-result quiz-summary" role="status" aria-live="polite"></div>
+                <div class="quiz-actions">
+                    <button type="button" id="review-answers">Review Answers</button>
+                    <button type="button" id="restart-quiz" class="secondary-button">Retake Quiz</button>
+                </div>
+            </div>
+
+            <div id="quiz-review-screen" hidden>
+                <div class="quiz-actions">
+                    <button type="button" id="back-to-results" class="secondary-button">Back to Results</button>
+                </div>
+                <div id="quiz-review"></div>
+            </div>
+
         </section>
+        <nav class="page-navigation" aria-label="Page navigation">
+            <a href="tool.html">← Interactive Tool</a>
+            <a href="index.html">Back to Home</a>
+        </nav>
     </main>
     <footer>
         <p>Rook Polynomial</p>
